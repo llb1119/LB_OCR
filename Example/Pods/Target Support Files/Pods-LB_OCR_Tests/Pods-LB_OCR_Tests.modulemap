@@ -1,0 +1,6 @@
+framework module Pods_LB_OCR_Tests {
+  umbrella header "Pods-LB_OCR_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

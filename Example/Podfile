@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'LB_OCR_Example' do
+  pod 'LB_OCR', :path => '../'
+
+  target 'LB_OCR_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

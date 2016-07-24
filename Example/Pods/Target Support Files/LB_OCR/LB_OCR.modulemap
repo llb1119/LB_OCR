@@ -1,0 +1,6 @@
+framework module LB_OCR {
+  umbrella header "LB_OCR-umbrella.h"
+
+  export *
+  module * { export * }
+}
