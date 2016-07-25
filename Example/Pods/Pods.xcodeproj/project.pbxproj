@@ -327,6 +327,9 @@
 		DC176608F17E1CAB9C5B524AB8AAB4AF /* tessdatamanager.h in Headers */ = {isa = PBXBuildFile; fileRef = F32FED30FADD5CD719C0C1E8F5821259 /* tessdatamanager.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DE2C20D57220ABC27997250617B37D17 /* drawedg.h in Headers */ = {isa = PBXBuildFile; fileRef = ECE0180B592A54FC6672F35C75148DA3 /* drawedg.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DE4B471B1D45977100EDDC33 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4B471A1D45977100EDDC33 /* opencv2.framework */; };
+		DE4B47211D460B1400EDDC33 /* RecognitionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DE4B471F1D460B1400EDDC33 /* RecognitionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE4B47221D460B1400EDDC33 /* RecognitionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4B47201D460B1400EDDC33 /* RecognitionOperation.m */; };
+		DE4B47251D46107300EDDC33 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = DE4B47241D46107200EDDC33 /* tessdata */; };
 		DEAA0EF1EA0D10E5301C593497EB5574 /* gradechop.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DB5F127E384DC8256A0F8018E2B9F2F /* gradechop.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DF1B6F3B1444B715CC2A42AF4C487803 /* dict.h in Headers */ = {isa = PBXBuildFile; fileRef = 4973E987328AB605359EE2DEAF850139 /* dict.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E00389806C7358D15F3B5676E06BA224 /* capi.h in Headers */ = {isa = PBXBuildFile; fileRef = 696DE13FB18F56F2C7D707F5A1B00C7A /* capi.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -738,6 +741,9 @@
 		DE086EE51697048E8BDA3F6E4E9EA58C /* mod128.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mod128.h; path = TesseractOCR/include/tesseract/mod128.h; sourceTree = "<group>"; };
 		DE13F2688BBC936DA67063807D2F8F5F /* ocrblock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocrblock.h; path = TesseractOCR/include/tesseract/ocrblock.h; sourceTree = "<group>"; };
 		DE4B471A1D45977100EDDC33 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		DE4B471F1D460B1400EDDC33 /* RecognitionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognitionOperation.h; sourceTree = "<group>"; };
+		DE4B47201D460B1400EDDC33 /* RecognitionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognitionOperation.m; sourceTree = "<group>"; };
+		DE4B47241D46107200EDDC33 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tessdata; path = LB_OCR/tessdata; sourceTree = "<group>"; };
 		DE5D2979DA9129E1C428835CF2AD2FDD /* cutil_class.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cutil_class.h; path = TesseractOCR/include/tesseract/cutil_class.h; sourceTree = "<group>"; };
 		DE69F3CB9F617E24B389D1B32FB2037C /* alltypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = alltypes.h; path = TesseractOCR/include/leptonica/alltypes.h; sourceTree = "<group>"; };
 		DE87B32248B78E9057F907F591962EA6 /* Pods-LB_OCR_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LB_OCR_Tests-resources.sh"; sourceTree = "<group>"; };
@@ -857,6 +863,7 @@
 		6791D43D7C31F262D79596394A0D56F3 /* LB_OCR */ = {
 			isa = PBXGroup;
 			children = (
+				DE4B47241D46107200EDDC33 /* tessdata */,
 				7F408E2B74368F635004576E69DFC574 /* LB_OCR */,
 				D367C43D14948C0B2A7C68307886B5E6 /* Support Files */,
 			);
@@ -922,6 +929,8 @@
 				BAAF2B14DDBE49531F777AE2D0049E70 /* Language.swift */,
 				4131C420D3967EBA6C5AF21AE24EAB16 /* Manager.swift */,
 				1719DFC053E314C8EC63395F69309736 /* ImagePreprocessing */,
+				DE4B471F1D460B1400EDDC33 /* RecognitionOperation.h */,
+				DE4B47201D460B1400EDDC33 /* RecognitionOperation.m */,
 			);
 			path = LB_OCR;
 			sourceTree = "<group>";
@@ -1377,6 +1386,7 @@
 			files = (
 				845B6C1169A86C80D2D033FE82E25861 /* LB_OCR-umbrella.h in Headers */,
 				C11CFD3E007C1991CB64841EDEAA1376 /* UIImage+Preprocessing.h in Headers */,
+				DE4B47211D460B1400EDDC33 /* RecognitionOperation.h in Headers */,
 				6DA0A6232EF1F030CC650E2E2E2DD1FD /* UIImage+OpenCV.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1781,6 +1791,7 @@
 				6FA2C406FAE497D2289AE89F80901B4F /* Sources */,
 				574834870FE5F2361632155DA588F451 /* Frameworks */,
 				5058D69487D78074B54565FEDC0A0C78 /* Headers */,
+				DE4B47231D46105900EDDC33 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1838,12 +1849,24 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		DE4B47231D46105900EDDC33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE4B47251D46107300EDDC33 /* tessdata in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6FA2C406FAE497D2289AE89F80901B4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3D61D167F5B8F91C811F4F93A0D94228 /* Error.swift in Sources */,
+				DE4B47221D460B1400EDDC33 /* RecognitionOperation.m in Sources */,
 				945216E2D3377CB3EA02F38998E74F5A /* Language.swift in Sources */,
 				481C7B7E14F34CDC21BE128AF8C6148A /* LB_OCR-dummy.m in Sources */,
 				B3D59AFAA49041891D56E681EED7E121 /* Manager.swift in Sources */,
