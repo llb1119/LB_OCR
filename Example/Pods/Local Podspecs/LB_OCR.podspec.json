@@ -18,7 +18,7 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "LB_OCR/Classes/**/*",
+  "source_files": "LB_OCR/**/*",
   "dependencies": {
     "TesseractOCRiOS": [
       "4.0.0"

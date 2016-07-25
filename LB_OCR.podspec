@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'LB_OCR/Classes/**/*'
+  s.source_files = 'LB_OCR/**/*'
   
   # s.resource_bundles = {
   #   'LB_OCR' => ['LB_OCR/Assets/*.png']
