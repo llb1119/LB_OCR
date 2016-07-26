@@ -72,4 +72,5 @@ typedef void (^G8RecognitionOperationCallback)(G8Tesseract *tesseract);
  */
 - (instancetype)initWithLanguage:(NSString *)language
                         dataPath:(NSString *)dataPath;
+- (instancetype)initWithEngine:(G8Tesseract *)engine;
 @end

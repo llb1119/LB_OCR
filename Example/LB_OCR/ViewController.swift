@@ -23,7 +23,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         do {
-            self.ocrEngine = try LB_OCR.Manager(languages: [Language.English, Language.French])
+            ocrEngine = try LB_OCR.Manager(languages: [Language.English, Language.French])
+            selectImageBtn.enabled = true
+            recognizeBtn.enabled = true
         }catch let error as NSError{
             print("error is \(error.code) \(error.localizedFailureReason ?? "")")
         }

@@ -49,7 +49,7 @@
                                     <action selector="findSquarePointClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="DO2-vI-8Xt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajX-4Y-1XA">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajX-4Y-1XA">
                                 <rect key="frame" x="481" y="562" width="72" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="y4u-yk-4oQ"/>
@@ -60,7 +60,7 @@
                                     <action selector="recognizeClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7IL-MS-6dm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHo-b6-zTx">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHo-b6-zTx">
                                 <rect key="frame" x="255" y="562" width="89" height="30"/>
                                 <state key="normal" title="Select image"/>
                                 <connections>

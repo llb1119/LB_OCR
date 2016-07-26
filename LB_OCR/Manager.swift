@@ -21,10 +21,8 @@ public class Manager{
     
     let operationQueue:NSOperationQueue
     let languages:LanguageOptions
-    var operation:RecognitionOperation
-    var progressBlock:ProgessBlock?
-    var completionHandler:CompletionHandler?
-    private let delegate = TesseractDelegate()
+    private let delegates = TesseractDelegateCollections()
+    private var tesseract:G8Tesseract?
     
     public init(languages:LanguageOptions = [Language.Chinese, Language.English]) throws{
         self.languages = languages
@@ -42,36 +40,7 @@ public class Manager{
             return operationQueue
         }()
         
-        self.operation = try {
-            let dataPath = NSBundle(forClass: RecognitionOperation.self)
-            print("dataPath = \(dataPath.resourcePath!)")
-            if let operation = RecognitionOperation(language: languages.combineString, dataPath:dataPath.resourcePath!), tesseract = operation.tesseract {
-                // Use the original Tesseract engine mode in performing the recognition
-                // (see G8Constants.h) for other engine mode options
-                
-                operation.tesseract.engineMode = .TesseractOnly;
-                
-                // Let Tesseract automatically segment the page into blocks of text
-                // based on its analysis (see G8Constants.h) for other page segmentation
-                // mode options
-                operation.tesseract.pageSegmentationMode = .AutoOnly;
-                
-                // Optionally limit the time Tesseract should spend performing the
-                // recognition
-                // operation.tesseract.maximumRecognitionTime = 1.0;
-                
-                // Set the delegate for the recognition to be this class
-                // (see `progressImageRecognitionForTesseract` and
-                // `shouldCancelImageRecognitionForTesseract` methods below)
-                //operation.delegate = self;
-                return operation
-            }else{
-                let failureReason = "init the engine failure"
-                throw Error.error(code: Error.Code.InitEngineFailed, failureReason: failureReason)
-            }
-        }()
-        delegate.wManager = self
-        operation.delegate = delegate
+        tesseract = try newTesseract()
     }
     
    
@@ -94,18 +63,10 @@ public class Manager{
             }
         }
         
-        //start to recognize
-        operation.tesseract.image = preHandledImage
-        self.progressBlock = progressBlock
-        operation.recognitionCompleteBlock = {
-            (tesseract: G8Tesseract! )in
-            print("recoginzedText is \(tesseract.recognizedText)");
-            if let tesseract = tesseract, recognizeString = tesseract.recognizedText where tesseract.recognize(){
-                completionHandler(recognizedText: recognizeString, error: nil)
-            } else{
-                completionHandler(recognizedText: nil, error: nil)
-            }
-        }
+        //new a operation
+        let operation = newOperation(preHandledImage, progressBlock: progressBlock)
+        
+        operation.recognitionCompleteBlock = makeCompletionHandler(operation, completionHandler: completionHandler)
         
         operationQueue.addOperation(operation)
     }
@@ -113,9 +74,10 @@ public class Manager{
     
     // MARK: - TesseractDelegate
     private final class TesseractDelegate:NSObject,G8TesseractDelegate{
-        weak var wManager:Manager?
-        override init() {
-            //
+        let progressBlock:ProgessBlock?
+        init(progressBlock:ProgessBlock? = nil) {
+            self.progressBlock = progressBlock
+            super.init()
         }
         /**
          *  An optional method to be called periodically during recognition so
@@ -125,7 +87,7 @@ public class Manager{
          */
         private func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
             print("progress: \(tesseract.progress)")
-            wManager?.progressBlock?(percent: tesseract.progress)
+            progressBlock?(percent: tesseract.progress)
         }
         
         /**
@@ -138,6 +100,85 @@ public class Manager{
          */
         private func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
             return false
+        }
+    }
+    
+    private class TesseractDelegateCollections {
+        var delegates = [String:TesseractDelegate]()
+        let delegatesQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_CONCURRENT)
+        subscript(queue:RecognitionOperation)->TesseractDelegate?{
+            get {
+                var delegate:TesseractDelegate? = nil
+                dispatch_async(delegatesQueue) {
+                    [weak self] in
+                    if let key = queue.name {
+                        delegate = self?.delegates[key]
+                    }
+                }
+                return delegate
+            }
+            set {
+                dispatch_barrier_async(delegatesQueue) {
+                    [weak self] in
+                    if let key = queue.name {
+                        self?.delegates[key] = newValue
+                    }
+                }
+            }
+        }
+    }
+}
+//MARK: private functions
+extension Manager {
+    func newTesseract() throws -> G8Tesseract? {
+        
+        let dataPath = NSBundle(forClass: RecognitionOperation.self)
+        
+        let tesseract = G8Tesseract(language: languages.combineString, configDictionary: nil, configFileNames: nil, absoluteDataPath: dataPath.resourcePath, engineMode: .TesseractOnly, copyFilesFromResources: false)
+        
+        if let tesseract = tesseract {
+            // Use the original Tesseract engine mode in performing the recognition
+            // (see G8Constants.h) for other engine mode options
+            
+            tesseract.engineMode = .TesseractOnly;
+            
+            // Let Tesseract automatically segment the page into blocks of text
+            // based on its analysis (see G8Constants.h) for other page segmentation
+            // mode options
+            tesseract.pageSegmentationMode = .AutoOnly;
+            
+            // Optionally limit the time Tesseract should spend performing the
+            // recognition
+            // operation.tesseract.maximumRecognitionTime = 1.0;
+            return tesseract
+        } else {
+            let failureReason = "init the engine failure"
+            throw Error.error(code: Error.Code.InitEngineFailed, failureReason: failureReason)
+            return nil
+        }
+    }
+    
+    func newOperation(image:UIImage, progressBlock:ProgessBlock? = nil) -> RecognitionOperation {
+        let operation = RecognitionOperation(engine: tesseract)
+        let delegate = TesseractDelegate(progressBlock: progressBlock)
+        tesseract?.image = image
+        operation.delegate = delegate
+        delegates[operation] = delegate
+        
+        return operation
+    }
+    
+    func makeCompletionHandler(operation:RecognitionOperation, completionHandler:CompletionHandler) -> G8RecognitionOperationCallback {
+        return {
+            [weak self](tesseract: G8Tesseract! )in
+            print("recoginzedText is \(tesseract.recognizedText)");
+            self?.delegates[operation] = nil
+            
+            if let tesseract = tesseract, recognizeString = tesseract.recognizedText where tesseract.recognize(){
+                completionHandler(recognizedText: recognizeString, error: nil)
+            } else{
+                completionHandler(recognizedText: nil, error: nil)
+            }
         }
     }
 }
