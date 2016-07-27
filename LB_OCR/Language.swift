@@ -14,7 +14,7 @@ import Foundation
  - Chiness:
  */
 public enum Language:String {
-    case English = "eng" ,Chinese = "chi", French = "fra"
+    case English = "eng" ,Chinese = "chi_sim", French = "fra"
 }
 extension Language:CustomStringConvertible,CustomDebugStringConvertible{
     

@@ -73,7 +73,7 @@ public class Manager{
     
     
     // MARK: - TesseractDelegate
-    private final class TesseractDelegate:NSObject,G8TesseractDelegate{
+     final class TesseractDelegate:NSObject,G8TesseractDelegate{
         let progressBlock:ProgessBlock?
         init(progressBlock:ProgessBlock? = nil) {
             self.progressBlock = progressBlock
@@ -85,7 +85,7 @@ public class Manager{
          *
          *  @param tesseract The `G8Tesseract` object performing the recognition.
          */
-        private func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
+        func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
             print("progress: \(tesseract.progress)")
             progressBlock?(percent: tesseract.progress)
         }
@@ -98,7 +98,7 @@ public class Manager{
          *
          *  @return Whether or not to cancel the recognition in progress.
          */
-        private func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
+        func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
             return false
         }
     }
@@ -174,7 +174,7 @@ extension Manager {
             print("recoginzedText is \(tesseract.recognizedText)");
             self?.delegates[operation] = nil
             
-            if let tesseract = tesseract, recognizeString = tesseract.recognizedText where tesseract.recognize(){
+            if let tesseract = tesseract, recognizeString = tesseract.recognizedText {
                 completionHandler(recognizedText: recognizeString, error: nil)
             } else{
                 completionHandler(recognizedText: nil, error: nil)

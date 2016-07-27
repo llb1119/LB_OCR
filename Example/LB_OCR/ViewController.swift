@@ -23,7 +23,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         do {
-            ocrEngine = try LB_OCR.Manager(languages: [Language.English, Language.French])
+            ocrEngine = try LB_OCR.Manager(languages: [Language.English,Language.Chinese])
             selectImageBtn.enabled = true
             recognizeBtn.enabled = true
         }catch let error as NSError{
@@ -77,13 +77,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func performImageRecognition(image: UIImage) {
-        ocrEngine.recognize(image) {[weak self] (recognizedText, error) in
-            self?.removeActivityIndicator()
-            
-            if error == nil{
-                self?.textView.text = recognizedText
-            }
+        ocrEngine.recognize(image, progressBlock: { (percent) in
+            print("percent \(percent)")
+            }) { [weak self](recognizedText, error) in
+                self?.removeActivityIndicator()
+                
+                if error == nil{
+                    print("finished ")
+                    self?.textView.text = recognizedText
+                }
         }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
