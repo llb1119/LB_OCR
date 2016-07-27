@@ -39,58 +39,160 @@
                                 </variation>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urn-nD-tww">
-                                <rect key="frame" x="12" y="562" width="117" height="30"/>
+                                <rect key="frame" x="20" y="562" width="49" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="8Y6-Td-x2S"/>
                                     <constraint firstAttribute="height" constant="30" id="EJb-ra-lSq"/>
-                                    <constraint firstAttribute="width" constant="117" id="aiH-E5-m0E"/>
+                                    <constraint firstAttribute="width" constant="49" id="aiH-E5-m0E"/>
+                                    <constraint firstAttribute="height" constant="30" id="rJl-vi-qeQ"/>
                                 </constraints>
-                                <state key="normal" title="Find SquarePoint"/>
+                                <state key="normal" title="Square"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EJb-ra-lSq"/>
+                                        <exclude reference="aiH-E5-m0E"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="findSquarePointClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="DO2-vI-8Xt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajX-4Y-1XA">
-                                <rect key="frame" x="481" y="562" width="72" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHo-b6-zTx">
+                                <rect key="frame" x="140" y="562" width="99" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="NTz-eo-6T1"/>
+                                    <constraint firstAttribute="width" constant="99" id="Xxc-Xk-9Bu"/>
+                                </constraints>
+                                <state key="normal" title="Select image"/>
+                                <connections>
+                                    <action selector="selectImageClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="V38-Ge-FKD"/>
+                                </connections>
+                            </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0xg-MS-zbl">
+                                <rect key="frame" x="20" y="295" width="560" height="268"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="268" id="teM-yd-N4e"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNc-6R-GiQ">
+                                <rect key="frame" x="84" y="562" width="48" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tzb-bM-R0j"/>
+                                    <constraint firstAttribute="width" constant="48" id="nrr-gk-AaH"/>
+                                    <constraint firstAttribute="width" constant="48" id="rSH-mW-ynv"/>
+                                </constraints>
+                                <state key="normal" title="gray"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="nrr-gk-AaH"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="grayClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zsI-Rv-P7N"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Mx-bu-xFk">
+                                <rect key="frame" x="20" y="28" width="560" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="9Ve-Xl-DIh"/>
+                                </constraints>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajX-4Y-1XA">
+                                <rect key="frame" x="247" y="562" width="72" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="0Na-yW-KAe"/>
+                                    <constraint firstAttribute="height" constant="30" id="ieX-z5-Zlt"/>
                                     <constraint firstAttribute="width" constant="72" id="y4u-yk-4oQ"/>
                                     <constraint firstAttribute="height" constant="30" id="zUd-Tf-Znk"/>
                                 </constraints>
                                 <state key="normal" title="Recognize"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="y4u-yk-4oQ"/>
+                                        <exclude reference="zUd-Tf-Znk"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="recognizeClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7IL-MS-6dm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHo-b6-zTx">
-                                <rect key="frame" x="255" y="562" width="89" height="30"/>
-                                <state key="normal" title="Select image"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1HV-VB-ZF5">
+                                <rect key="frame" x="20" y="533" width="71" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6yY-ow-Bco"/>
+                                    <constraint firstAttribute="width" constant="71" id="Lro-f1-9LH"/>
+                                </constraints>
+                                <state key="normal" title="correcting"/>
                                 <connections>
-                                    <action selector="selectImageClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="V38-Ge-FKD"/>
+                                    <action selector="correctingClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="K1g-yH-bnr"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="urn-nD-tww" secondAttribute="bottom" constant="8" id="1Sj-q0-1NX"/>
+                            <constraint firstItem="lNc-6R-GiQ" firstAttribute="top" secondItem="wrX-A9-QFO" secondAttribute="bottom" constant="20" id="2fK-tI-GIx"/>
                             <constraint firstItem="KHo-b6-zTx" firstAttribute="baseline" secondItem="ajX-4Y-1XA" secondAttribute="baseline" id="4O9-4G-NIf"/>
+                            <constraint firstItem="KHo-b6-zTx" firstAttribute="leading" secondItem="lNc-6R-GiQ" secondAttribute="trailing" id="5ee-ND-Ghy"/>
                             <constraint firstItem="eBe-gj-lck" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="5rv-oB-pWC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ajX-4Y-1XA" secondAttribute="trailing" id="Ain-FO-KVM"/>
                             <constraint firstItem="wrX-A9-QFO" firstAttribute="leading" secondItem="eBe-gj-lck" secondAttribute="leading" id="COQ-XC-Vd1"/>
+                            <constraint firstItem="6Mx-bu-xFk" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="FRB-1Z-Smf"/>
+                            <constraint firstItem="ajX-4Y-1XA" firstAttribute="centerY" secondItem="KHo-b6-zTx" secondAttribute="centerY" id="H60-nV-7uQ"/>
+                            <constraint firstItem="KHo-b6-zTx" firstAttribute="centerY" secondItem="lNc-6R-GiQ" secondAttribute="centerY" id="Kez-Uh-4xC"/>
+                            <constraint firstItem="6Mx-bu-xFk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="L7W-N6-uZV"/>
                             <constraint firstItem="ajX-4Y-1XA" firstAttribute="centerY" secondItem="urn-nD-tww" secondAttribute="centerY" id="SSP-26-Qjd"/>
-                            <constraint firstItem="urn-nD-tww" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-8" id="VVn-N4-YXc"/>
+                            <constraint firstItem="1HV-VB-ZF5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="SWo-xA-CJs"/>
+                            <constraint firstItem="KHo-b6-zTx" firstAttribute="leading" secondItem="lNc-6R-GiQ" secondAttribute="trailing" constant="8" id="SdJ-lF-E02"/>
+                            <constraint firstItem="urn-nD-tww" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="26" id="VVn-N4-YXc"/>
+                            <constraint firstItem="urn-nD-tww" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="YHw-yK-Qhs"/>
+                            <constraint firstItem="lNc-6R-GiQ" firstAttribute="centerY" secondItem="urn-nD-tww" secondAttribute="centerY" id="YXz-mG-AL3"/>
+                            <constraint firstItem="lNc-6R-GiQ" firstAttribute="centerY" secondItem="urn-nD-tww" secondAttribute="centerY" id="YxR-hz-vc3"/>
+                            <constraint firstItem="0xg-MS-zbl" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bix-6J-5cf"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="urn-nD-tww" secondAttribute="bottom" constant="8" id="bzq-3v-bWA"/>
+                            <constraint firstItem="urn-nD-tww" firstAttribute="top" secondItem="0xg-MS-zbl" secondAttribute="bottom" constant="-1" id="dC4-U9-l2P"/>
+                            <constraint firstItem="lNc-6R-GiQ" firstAttribute="leading" secondItem="urn-nD-tww" secondAttribute="trailing" constant="8" id="eO3-jN-pEZ"/>
+                            <constraint firstItem="0xg-MS-zbl" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="eY3-Bl-POM"/>
                             <constraint firstItem="wrX-A9-QFO" firstAttribute="trailing" secondItem="eBe-gj-lck" secondAttribute="trailing" id="fHZ-38-Ch7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ajX-4Y-1XA" secondAttribute="trailing" constant="27" id="guP-t6-5DQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ajX-4Y-1XA" secondAttribute="trailing" id="guP-t6-5DQ"/>
+                            <constraint firstItem="urn-nD-tww" firstAttribute="top" secondItem="1HV-VB-ZF5" secondAttribute="bottom" constant="-1" id="hbd-Cu-Jgc"/>
                             <constraint firstItem="eBe-gj-lck" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="jL2-lm-Va1"/>
                             <constraint firstItem="eBe-gj-lck" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="oeN-xe-7mq"/>
                             <constraint firstItem="wrX-A9-QFO" firstAttribute="top" secondItem="eBe-gj-lck" secondAttribute="bottom" id="p8u-rT-OHW"/>
+                            <constraint firstItem="lNc-6R-GiQ" firstAttribute="leading" secondItem="urn-nD-tww" secondAttribute="trailing" constant="15" id="tHb-xo-NNv"/>
+                            <constraint firstItem="6Mx-bu-xFk" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="tv5-gZ-BuD"/>
+                            <constraint firstItem="ajX-4Y-1XA" firstAttribute="leading" secondItem="KHo-b6-zTx" secondAttribute="trailing" constant="8" id="upF-uV-RQi"/>
                             <constraint firstItem="urn-nD-tww" firstAttribute="top" secondItem="wrX-A9-QFO" secondAttribute="bottom" constant="20" id="w5H-OO-GKG"/>
-                            <constraint firstItem="KHo-b6-zTx" firstAttribute="centerX" secondItem="wrX-A9-QFO" secondAttribute="centerX" id="yao-7Z-pum"/>
+                            <constraint firstItem="0xg-MS-zbl" firstAttribute="top" secondItem="eBe-gj-lck" secondAttribute="bottom" constant="8" id="y5K-p7-NOj"/>
+                            <constraint firstItem="KHo-b6-zTx" firstAttribute="centerX" secondItem="wrX-A9-QFO" secondAttribute="centerX" constant="-121.5" id="yao-7Z-pum"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="VVn-N4-YXc"/>
+                                <exclude reference="dC4-U9-l2P"/>
+                                <exclude reference="w5H-OO-GKG"/>
+                                <exclude reference="YXz-mG-AL3"/>
+                                <exclude reference="eO3-jN-pEZ"/>
+                                <exclude reference="4O9-4G-NIf"/>
+                                <exclude reference="5ee-ND-Ghy"/>
+                                <exclude reference="yao-7Z-pum"/>
+                                <exclude reference="1Sj-q0-1NX"/>
+                                <exclude reference="Ain-FO-KVM"/>
+                                <exclude reference="SSP-26-Qjd"/>
+                                <exclude reference="guP-t6-5DQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="RecognizeBtn" destination="SSP-26-Qjd" id="gNt-5a-2nn"/>
+                        <outlet property="correctingBtn" destination="1HV-VB-ZF5" id="mNT-g5-OzL"/>
+                        <outlet property="dstImageView" destination="0xg-MS-zbl" id="RFe-kN-fL9"/>
                         <outlet property="findSquarePointBtn" destination="urn-nD-tww" id="srZ-ZI-X8M"/>
-                        <outlet property="imageView" destination="eBe-gj-lck" id="Q2m-zh-weE"/>
+                        <outlet property="grayBtn" destination="lNc-6R-GiQ" id="fGY-qi-m7V"/>
+                        <outlet property="progressView" destination="6Mx-bu-xFk" id="HGe-GH-hO1"/>
                         <outlet property="recognizeBtn" destination="ajX-4Y-1XA" id="qqb-5B-G1V"/>
                         <outlet property="selectImageBtn" destination="KHo-b6-zTx" id="NxM-pg-Er7"/>
+                        <outlet property="srcImageView" destination="eBe-gj-lck" id="59o-8O-tLz"/>
                         <outlet property="textView" destination="wrX-A9-QFO" id="K06-MZ-QHj"/>
                     </connections>
                 </viewController>

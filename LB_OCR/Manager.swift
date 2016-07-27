@@ -23,6 +23,8 @@ public class Manager{
     let languages:LanguageOptions
     private let delegates = TesseractDelegateCollections()
     private var tesseract:G8Tesseract?
+    var startTime: CFAbsoluteTime?
+    var endTime: CFAbsoluteTime?
     
     public init(languages:LanguageOptions = [Language.Chinese, Language.English]) throws{
         self.languages = languages
@@ -75,7 +77,7 @@ public class Manager{
         let operation = newOperation(preHandledImage, progressBlock: progressBlock)
         
         operation.recognitionCompleteBlock = makeCompletionHandler(operation, completionHandler: completionHandler)
-        
+        startTime = CFAbsoluteTimeGetCurrent()
         operationQueue.addOperation(operation)
     }
     
@@ -94,8 +96,10 @@ public class Manager{
          *  @param tesseract The `G8Tesseract` object performing the recognition.
          */
         func progressImageRecognitionForTesseract(tesseract: G8Tesseract!) {
-            print("progress: \(tesseract.progress)")
-            progressBlock?(percent: tesseract.progress)
+            dispatch_async(dispatch_get_main_queue()) {
+                [weak self] in
+                self?.progressBlock?(percent: tesseract.progress)
+            }
         }
         
         /**
@@ -181,7 +185,10 @@ extension Manager {
             [weak self](tesseract: G8Tesseract! )in
             print("recoginzedText is \(tesseract.recognizedText)");
             self?.delegates[operation] = nil
-            
+            self?.endTime = CFAbsoluteTimeGetCurrent()
+            let spendTime = (self?.endTime!)!-(self?.startTime!)!
+            let seconds = Float(Int(100*spendTime))/100
+            print("spend time \(seconds)s recoginzedText is \(tesseract.recognizedText)");
             if let tesseract = tesseract, recognizeString = tesseract.recognizedText {
                 completionHandler(recognizedText: recognizeString, error: nil)
             } else{

@@ -9,7 +9,6 @@
 #endif
 #import "UIImage+OpenCV.h"
 #import "UIImage+Preprocessing.h"
-//#define _DRAW_LINE_
 const SquarePoint SquarePointZero = {.p0 = 0, .p1 = 0, .p2 = 0, .p3 = 0};
 using namespace cv;
 using namespace std;
@@ -55,16 +54,23 @@ static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
     corners.push_back(cv::Point(square.p1.x, square.p1.y));
     corners.push_back(cv::Point(square.p2.x, square.p2.y));
     corners.push_back(cv::Point(square.p3.x, square.p3.y));
-#ifndef _DRAW_LINE_
     // Get transformation matrix
     cv::Mat transmtx = cv::getPerspectiveTransform(corners, quad_pts);
     // Apply perspective transformation
     cv::warpPerspective(matImage, quadImg, transmtx, quadImg.size());
     dstImage = [UIImage imageWithCVMat:quadImg];
-#else
+    
+    return dstImage;
+}
+- (UIImage*)getTransformImageDebug{
+    Mat matImage = self.CVMat;
+    UIImage *dstImage = nil;
+    vector<vector<cv::Point>> squares;
+    
+    findSquares(self.CVMat, squares);
     drawSquares(matImage, squares);
     dstImage = [UIImage imageWithCVMat:matImage];
-#endif
+    
     return dstImage;
 }
 /**

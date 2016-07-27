@@ -35,4 +35,5 @@ typedef struct SquarePoint {
  *  @return true:sucess false:not find square
  */
 - (bool)getSquare:(SquarePoint *)square;
+- (UIImage*)getTransformImageDebug;
 @end
