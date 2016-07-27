@@ -57,10 +57,18 @@ public class Manager{
         // pre handle image
         if let squarePoint = squarePoint {
             if let tmpImage = image.getTransformImageWithSquare(squarePoint) {
+                print("Success to pre-handle image with squarePoint");
                 preHandledImage = tmpImage;
             } else{
-                print("pre handle image failure")
+                print("fail to pre-handle image with squarePoint")
             }
+        } else {
+//            if let tmpImage = image.getTransformImage() {
+//                print("Success to pre-handle image");
+//                preHandledImage = tmpImage;
+//            } else{
+//                print("fail to pre-handle image")
+//            }
         }
         
         //new a operation
