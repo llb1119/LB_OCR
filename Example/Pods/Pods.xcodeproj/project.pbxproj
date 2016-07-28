@@ -331,6 +331,7 @@
 		DE4B47221D460B1400EDDC33 /* RecognitionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4B47201D460B1400EDDC33 /* RecognitionOperation.m */; };
 		DE4B47251D46107300EDDC33 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = DE4B47241D46107200EDDC33 /* tessdata */; };
 		DEAA0EF1EA0D10E5301C593497EB5574 /* gradechop.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DB5F127E384DC8256A0F8018E2B9F2F /* gradechop.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		DEB29ABA1D49FBF3008F2650 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB29AB91D49FBF3008F2650 /* libstdc++.6.0.9.tbd */; };
 		DF1B6F3B1444B715CC2A42AF4C487803 /* dict.h in Headers */ = {isa = PBXBuildFile; fileRef = 4973E987328AB605359EE2DEAF850139 /* dict.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E00389806C7358D15F3B5676E06BA224 /* capi.h in Headers */ = {isa = PBXBuildFile; fileRef = 696DE13FB18F56F2C7D707F5A1B00C7A /* capi.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E018C9E2DD4D0BC93DF494F978477382 /* char_altlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D32CA466361A8A5B8FF488838E9288F /* char_altlist.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -747,6 +748,7 @@
 		DE5D2979DA9129E1C428835CF2AD2FDD /* cutil_class.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cutil_class.h; path = TesseractOCR/include/tesseract/cutil_class.h; sourceTree = "<group>"; };
 		DE69F3CB9F617E24B389D1B32FB2037C /* alltypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = alltypes.h; path = TesseractOCR/include/leptonica/alltypes.h; sourceTree = "<group>"; };
 		DE87B32248B78E9057F907F591962EA6 /* Pods-LB_OCR_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LB_OCR_Tests-resources.sh"; sourceTree = "<group>"; };
+		DEB29AB91D49FBF3008F2650 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libstdc++.6.0.9.tbd"; sourceTree = DEVELOPER_DIR; };
 		DF28AB9E7DB46C3AEB4D1D0295C52E2E /* boxchar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = boxchar.h; path = TesseractOCR/include/tesseract/boxchar.h; sourceTree = "<group>"; };
 		DFC1A34148A62C6B886734316C1FE589 /* allheaders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = allheaders.h; path = TesseractOCR/include/leptonica/allheaders.h; sourceTree = "<group>"; };
 		DFC4466B7133FA9968F3AE8F7F91CC7D /* ratngs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ratngs.h; path = TesseractOCR/include/tesseract/ratngs.h; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB29ABA1D49FBF3008F2650 /* libstdc++.6.0.9.tbd in Frameworks */,
 				DE4B471B1D45977100EDDC33 /* opencv2.framework in Frameworks */,
 				5B03D775681A61D0619585E0A00C32CB /* Foundation.framework in Frameworks */,
 				5CCB37C10178E39D060108E616E2653F /* TesseractOCR.framework in Frameworks */,
@@ -892,6 +895,7 @@
 		73025809F33650E67029CD584B254E38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEB29AB91D49FBF3008F2650 /* libstdc++.6.0.9.tbd */,
 				DE4B471A1D45977100EDDC33 /* opencv2.framework */,
 				3F08E6D8007419C5178B557413CBD230 /* TesseractOCR.framework */,
 				9220F78A38EF3159169DD35D9A2646BA /* iOS */,

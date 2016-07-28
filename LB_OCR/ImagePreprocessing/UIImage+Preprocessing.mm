@@ -6,6 +6,8 @@
 //
 #ifdef __cplusplus
 #import <opencv2/imgproc.hpp>
+#import <list>
+#import <vector>
 #endif
 #import "UIImage+OpenCV.h"
 #import "UIImage+Preprocessing.h"
@@ -15,7 +17,7 @@ using namespace std;
 static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares);
 static void drawSquares(Mat &image, const vector<vector<cv::Point>> &squares);
 static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
-
+static bool areaComp(const vector<cv::Point> &a,const vector<cv::Point> &b);
 @implementation UIImage (PerspectiveTransform)
 /**
  *  get perspective transformed image
@@ -68,6 +70,7 @@ static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
     vector<vector<cv::Point>> squares;
     
     findSquares(self.CVMat, squares);
+    std::sort(squares.begin(), squares.end(), areaComp);
     drawSquares(matImage, squares);
     dstImage = [UIImage imageWithCVMat:matImage];
     
@@ -90,14 +93,21 @@ static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
 
     findSquares(self.CVMat, squares);
 
-    if (squares.size() > 0 && squares[0].size() > 3) {
-        square->p0 = CGPointMake(squares[0][0].x, squares[0][0].y);
-        square->p1 = CGPointMake(squares[0][3].x, squares[0][3].y);
-        square->p2 = CGPointMake(squares[0][2].x, squares[0][2].y);
-        square->p3 = CGPointMake(squares[0][1].x, squares[0][1].y);
-
-        return true;
-    } else {
+    if (squares.size() > 0) {
+        std::sort(squares.begin(), squares.end(), areaComp);
+        vector<cv::Point> vSquare = squares[0];
+        
+        if (squares[0].size() > 3) {
+            square->p0 = CGPointMake(vSquare[0].x, vSquare[0].y);
+            square->p1 = CGPointMake(vSquare[3].x, vSquare[3].y);
+            square->p2 = CGPointMake(vSquare[2].x, vSquare[2].y);
+            square->p3 = CGPointMake(vSquare[1].x, vSquare[1].y);
+            
+            return true;
+        } else {
+            return false;
+        }
+    }else {
         return false;
     }
 }
@@ -118,8 +128,9 @@ static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
     
     return [[UIImage alloc] initWithCVMat:denoise];
 }
-@end
 
+@end
+#pragma mark- private fun
 static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
     squares.clear();
     int thresh = 50, N = 11;
@@ -169,9 +180,10 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
                 // Note: absolute value of an area is used because
                 // area may be positive or negative - in accordance with the
                 // contour orientation
-                if (approx.size() == 4 && fabs(contourArea(Mat(approx))) > 1000 && isContourConvex(Mat(approx))) {
+                double area = fabs(contourArea(Mat(approx)));
+                if (approx.size() == 4 && area > 100000 && isContourConvex(Mat(approx))) {
                     double maxCosine = 0;
-
+                    //NSLog(@"area = %f", area);
                     for (int j = 2; j < 5; j++) {
                         // find the maximum cosine of the angle between joint edges
                         double cosine = fabs(angle(approx[j % 4], approx[j - 2], approx[j - 1]));
@@ -187,21 +199,35 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
         }
     }
 }
-#if 1
+static bool findPropertySquare(vector<vector<cv::Point>> &squares, vector<cv::Point>* square, InputArray maxSquare){
+    bool sucess = true;
+    if (squares.size() <= 0 ) {
+        return false;
+    }
+    
+    std::sort(squares.begin(), squares.end(), areaComp);
+    *square = squares[0];
+    //for (int i = 0; i < squares.size(); i++) {
+        //
+    //}
+    return true;
+}
+static bool areaComp(const vector<cv::Point> &a,const vector<cv::Point> &b)
+{
+    double aArea = fabs(contourArea(Mat(a)));
+    double bArea = fabs(contourArea(Mat(b)));
+    return aArea>bArea;
+}
 // the function draws all the squares in the image
 static void drawSquares(Mat &image, const vector<vector<cv::Point>> &squares) {
-    // for (size_t i = 0; i < squares.size(); i++) {
-    if (squares.size() > 0 && squares[0].size() > 0) {
-        const cv::Point *p = &squares[0][0];
-        int n = (int)squares[0].size();
-        NSLog(@"n = %d", n);
+     for (size_t i = 0; i < squares.size() &&squares[i].size() >0 ; i++) {
+         double area = fabs(contourArea(Mat(squares[i])));
+         NSLog(@"area2 = %f", area);
+        const cv::Point *p = &squares[i][0];
+        int n = squares[i].size();
         polylines(image, &p, &n, 1, true, Scalar(0, 255, 0), 3, LINE_AA);
     }
-    //}
-
-    // imshow(wndname, image);
 }
-#endif
 // helper function:
 // finds a cosine of angle between vectors
 // from pt0->pt1 and from pt0->pt2
