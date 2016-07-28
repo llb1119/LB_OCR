@@ -101,7 +101,23 @@ static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
         return false;
     }
 }
-
+- (UIImage*)gray {
+    return [[UIImage alloc] initWithCVMat:self.CVGrayscaleMat];
+}
+- (UIImage*)threshold {
+    //1.gray
+    cv::Mat gray = self.CVGrayscaleMat;
+    cv::Mat thresholdMat(gray.size(), CV_8U), denoise, tmp;
+    
+    //2.threshold
+    threshold(gray, thresholdMat, 90, 255, CV_THRESH_OTSU);
+    
+    //3.denoise
+    pyrDown(thresholdMat, tmp, cv::Size(thresholdMat.cols / 2, thresholdMat.rows / 2));
+    pyrUp(tmp, denoise, thresholdMat.size());
+    
+    return [[UIImage alloc] initWithCVMat:denoise];
+}
 @end
 
 static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
@@ -113,7 +129,7 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
     pyrDown(image, pyr, cv::Size(image.cols / 2, image.rows / 2));
     pyrUp(pyr, timg, image.size());
     vector<vector<cv::Point>> contours;
-
+    
     // find squares in every color plane of the image
     for (int c = 0; c < 3; c++) {
         int ch[] = {c, 0};
@@ -129,13 +145,12 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
                 Canny(gray0, gray, 0, thresh, 5);
                 // dilate canny output to remove potential
                 // holes between edge segments
-                // dilate(gray, gray, Mat(), cv::Point(-1, -1));
-
+                //dilate(gray, gray, Mat(), cv::Point(-1, -1));
             } else {
                 // apply threshold if l!=0:
                 //     tgray(x,y) = gray(x,y) < (l+1)*255/N ? 255 : 0
-                // gray = gray0 >= (l + 1) * 255 / N;
-                threshold(gray0, gray, 50, 255, CV_THRESH_BINARY);
+                //gray = gray0 >= (l + 1) * 255 / N;
+                threshold(gray0, gray, 0, 255, CV_THRESH_BINARY|CV_THRESH_OTSU);
             }
 
             // find contours and store them all as a list
@@ -176,10 +191,12 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
 // the function draws all the squares in the image
 static void drawSquares(Mat &image, const vector<vector<cv::Point>> &squares) {
     // for (size_t i = 0; i < squares.size(); i++) {
-    const cv::Point *p = &squares[0][0];
-    int n = (int)squares[0].size();
-    NSLog(@"n = %d", n);
-    polylines(image, &p, &n, 1, true, Scalar(0, 255, 0), 3, LINE_AA);
+    if (squares.size() > 0 && squares[0].size() > 0) {
+        const cv::Point *p = &squares[0][0];
+        int n = (int)squares[0].size();
+        NSLog(@"n = %d", n);
+        polylines(image, &p, &n, 1, true, Scalar(0, 255, 0), 3, LINE_AA);
+    }
     //}
 
     // imshow(wndname, image);

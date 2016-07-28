@@ -23,6 +23,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     var activityIndicator:UIActivityIndicatorView!
     var ocrEngine:LB_OCR.Manager!
     
+    @IBOutlet weak var thresholdBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -44,6 +45,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     @IBAction func grayClick(sender: AnyObject) {
+        if let image = srcImageView.image {
+            dstImageView.image = image.gray;
+            hiddenDstImageView(false)
+        }
+    }
+    @IBAction func thresholdClick(sender: AnyObject) {
+        if let image = srcImageView.image {
+            dstImageView.image = image.threshold;
+            srcImageView.image = dstImageView.image
+            hiddenDstImageView(false)
+        }
     }
     @IBAction func correctingClick(sender: AnyObject) {
         if let image = srcImageView.image{
@@ -104,7 +116,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     func performImageRecognition(image: UIImage) {
         setBtns(false)
         progressView.hidden = false
+        textView.text = nil
         hiddenDstImageView(true)
+        self.progressView.setProgress(0.0, animated: false)
         
         ocrEngine.recognize(image, progressBlock: {[weak self] (percent) in
             self?.progressView.setProgress(Float(percent)/100.0, animated: true)
@@ -162,6 +176,7 @@ extension ViewController {
         recognizeBtn.enabled = enabled
         selectImageBtn.enabled = enabled
         correctingBtn.enabled = enabled
+        thresholdBtn.enabled = enabled
     }
     
     private func hiddenDstImageView(hidden:Bool){

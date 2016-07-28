@@ -13,6 +13,8 @@ typedef struct SquarePoint {
   CGPoint p3;
 } SquarePoint;
 @interface UIImage (PerspectiveTransform)
+@property (nonatomic,strong) UIImage *gray;
+@property (nonatomic,strong) UIImage *threshold;
 /**
  *  get perspective transformed image
  *
