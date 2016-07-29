@@ -25,15 +25,15 @@
     }
     return self;
 }
-- (instancetype)initWithLanguage:(NSString *)language
-                        dataPath:(NSString *)dataPath {
+- (instancetype)initWithLanguage:(NSString *)language {
     self = [super init];
     if (self) {
+        NSBundle* dataPath = [NSBundle bundleForClass:self.class];
         _tesseract =
         [[G8Tesseract alloc] initWithLanguage:language
                              configDictionary:nil
                               configFileNames:nil
-                             absoluteDataPath:dataPath
+                             absoluteDataPath:dataPath.resourcePath
                                    engineMode:G8OCREngineModeTesseractOnly
                        copyFilesFromResources:NO];
         _tesseract.delegate = self;

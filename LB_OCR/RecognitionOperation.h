@@ -70,7 +70,6 @@ typedef void (^G8RecognitionOperationCallback)(G8Tesseract *tesseract);
  *  @return The initialized G8RecognitionOperation object, or `nil` if there
  *          was an error.
  */
-- (instancetype)initWithLanguage:(NSString *)language
-                        dataPath:(NSString *)dataPath;
+- (instancetype)initWithLanguage:(NSString *)language;
 - (instancetype)initWithEngine:(G8Tesseract *)engine;
 @end

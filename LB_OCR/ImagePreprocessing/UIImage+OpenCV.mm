@@ -74,7 +74,7 @@
   }
 
   CGDataProviderRef provider =
-      CGDataProviderCreateWithCFData((__bridge_retained CFDataRef)data);
+      CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
 
   CGImageRef imageRef = CGImageCreate(
       cvMat.cols,                                    // Width

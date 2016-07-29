@@ -69,7 +69,7 @@ static bool areaComp(const vector<cv::Point> &a,const vector<cv::Point> &b);
     UIImage *dstImage = nil;
     vector<vector<cv::Point>> squares;
     
-    findSquares(self.CVMat, squares);
+    findSquares(matImage, squares);
     std::sort(squares.begin(), squares.end(), areaComp);
     drawSquares(matImage, squares);
     dstImage = [UIImage imageWithCVMat:matImage];
@@ -98,11 +98,18 @@ static bool areaComp(const vector<cv::Point> &a,const vector<cv::Point> &b);
         vector<cv::Point> vSquare = squares[0];
         
         if (squares[0].size() > 3) {
-            square->p0 = CGPointMake(vSquare[0].x, vSquare[0].y);
-            square->p1 = CGPointMake(vSquare[3].x, vSquare[3].y);
-            square->p2 = CGPointMake(vSquare[2].x, vSquare[2].y);
-            square->p3 = CGPointMake(vSquare[1].x, vSquare[1].y);
-            
+#if TARGET_IPHONE_SIMULATOR
+            square->p0 = CGPointMake(vSquare[0].x, vSquare[0].y);//2
+            square->p1 = CGPointMake(vSquare[3].x, vSquare[3].y);//3
+            square->p2 = CGPointMake(vSquare[2].x, vSquare[2].y);//4
+            square->p3 = CGPointMake(vSquare[1].x, vSquare[1].y);//1
+#else
+            square->p0 = CGPointMake(vSquare[1].x, vSquare[1].y);
+            square->p1 = CGPointMake(vSquare[0].x, vSquare[0].y);
+            square->p2 = CGPointMake(vSquare[3].x, vSquare[3].y);
+            square->p3 = CGPointMake(vSquare[2].x, vSquare[2].y);
+
+#endif
             return true;
         } else {
             return false;
@@ -181,7 +188,7 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
                 // area may be positive or negative - in accordance with the
                 // contour orientation
                 double area = fabs(contourArea(Mat(approx)));
-                if (approx.size() == 4 && area > 100000 && isContourConvex(Mat(approx))) {
+                if (approx.size() == 4 && area > 10000 && isContourConvex(Mat(approx))) {
                     double maxCosine = 0;
                     //NSLog(@"area = %f", area);
                     for (int j = 2; j < 5; j++) {

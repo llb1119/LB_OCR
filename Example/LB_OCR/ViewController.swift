@@ -15,14 +15,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var textView: UITextView!
     
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var correctingBtn: UIButton!
     @IBOutlet weak var recognizeBtn: UIButton!
     @IBOutlet weak var grayBtn: UIButton!
     @IBOutlet weak var findSquarePointBtn: UIButton!
     @IBOutlet weak var selectImageBtn: UIButton!
+    @IBOutlet weak var rotateBtn: UIButton!
+    @IBOutlet weak var cleanBtn: UIButton!
+    var timer:NSTimer!
     var activityIndicator:UIActivityIndicatorView!
     var ocrEngine:LB_OCR.Manager!
-    
+    var tick = 0
     @IBOutlet weak var thresholdBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +35,24 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         progressView.hidden = true
         dstImageView.hidden = true
         do {
-            ocrEngine = try LB_OCR.Manager(languages: [Language.Chinese])
+            ocrEngine = try LB_OCR.Manager(languages: [Language.Chinese, Language.English])
             selectImageBtn.enabled = true
         }catch let error as NSError{
             print("error is \(error.code) \(error.localizedFailureReason ?? "")")
         }
     }
     
+    @IBAction func cleanClick(sender: AnyObject) {
+        dstImageView.image = nil
+        textView.text = nil
+        timerLabel.text = nil
+    }
+    @IBAction func rotateClick(sender: AnyObject) {
+        if let image = dstImageView.image {
+            let rotatedImage = image.rotate(.Right)
+            dstImageView.image = rotatedImage
+        }
+    }
     @IBAction func findSquarePointClick(sender: AnyObject) {
         if let image = srcImageView.image{
             dstImageView.image = image.getTransformImageDebug()
@@ -45,15 +60,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     @IBAction func grayClick(sender: AnyObject) {
-        if let image = srcImageView.image {
+        if let image = dstImageView.image ?? srcImageView.image {
             dstImageView.image = image.gray;
             hiddenDstImageView(false)
         }
     }
     @IBAction func thresholdClick(sender: AnyObject) {
-        if let image = srcImageView.image {
+        if let image = dstImageView.image ?? srcImageView.image {
             dstImageView.image = image.threshold;
-            srcImageView.image = dstImageView.image
             hiddenDstImageView(false)
         }
     }
@@ -73,6 +87,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     @IBAction func selectImageClick(sender: AnyObject) {
+        srcImageView.image = nil
+        dstImageView.image = nil
+        textView.text = nil
         // 1
         view.endEditing(true)
         ()
@@ -119,11 +136,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         textView.text = nil
         hiddenDstImageView(true)
         self.progressView.setProgress(0.0, animated: false)
+        tick = 0
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.timeTickDown), userInfo: nil, repeats: true)
         
         ocrEngine.recognize(image, progressBlock: {[weak self] (percent) in
             self?.progressView.setProgress(Float(percent)/100.0, animated: true)
             
             }) { [weak self](recognizedText, error) in
+                self?.timer.invalidate()
+                self?.timer = nil
                 self?.progressView.setProgress(1, animated: true)
                 self?.progressView.hidden = true
                 self?.setBtns(true)
@@ -153,6 +174,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         activityIndicator.removeFromSuperview()
         activityIndicator = nil
     }
+    
+    func timeTickDown() {
+        tick += 1
+        timerLabel.text = String(tick) + " s"
+    }
 
 }
 
@@ -177,6 +203,7 @@ extension ViewController {
         selectImageBtn.enabled = enabled
         correctingBtn.enabled = enabled
         thresholdBtn.enabled = enabled
+        rotateBtn.enabled = enabled
     }
     
     private func hiddenDstImageView(hidden:Bool){

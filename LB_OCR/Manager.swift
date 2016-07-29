@@ -21,15 +21,18 @@ public class Manager{
     
     let operationQueue:NSOperationQueue
     let languages:LanguageOptions
-    private let delegates = TesseractDelegateCollections()
+    //private let delegates = TesseractDelegateCollections()
+    let delegate = TesseractDelegate()
     private var tesseract:G8Tesseract?
     var startTime: CFAbsoluteTime?
     var endTime: CFAbsoluteTime?
     
     public init(languages:LanguageOptions = [Language.Chinese, Language.English]) throws{
         self.languages = languages
-        guard !languages.combineString.isEmpty else{ let failureReason = "init the engine failure"
-            throw Error.error(code: Error.Code.InitEngineFailed, failureReason: failureReason)}
+        guard !languages.combineString.isEmpty else{
+            let failureReason = "init the engine failure"
+            throw Error.error(code: Error.Code.InitEngineFailed, failureReason: failureReason)
+        }
         
         self.operationQueue = {
            let operationQueue = NSOperationQueue()
@@ -41,8 +44,6 @@ public class Manager{
             
             return operationQueue
         }()
-        
-        tesseract = try newTesseract()
     }
     
    
@@ -65,14 +66,20 @@ public class Manager{
                 print("fail to pre-handle image with squarePoint")
             }
         } else {
-            if let tmpImage = image.getTransformImage()?.threshold {
-                print("Success to pre-handle image");
-                preHandledImage = tmpImage;
-            } else{
-                print("fail to pre-handle image")
-            }
+//            if let tmpImage = image.getTransformImage()?.threshold {
+//                print("Success to pre-handle image");
+//                preHandledImage = tmpImage;
+//            } else{
+//                print("fail to pre-handle image")
+//            }
         }
-        
+        do {
+            tesseract = try newTesseract()
+        }catch {
+            let error = Error.error(code: Error.Code.InitEngineFailed, failureReason: "init the engine failure")
+            completionHandler(recognizedText: nil, error: error)
+            return
+        }
         //new a operation
         let operation = newOperation(preHandledImage, progressBlock: progressBlock)
         
@@ -84,7 +91,7 @@ public class Manager{
     
     // MARK: - TesseractDelegate
      final class TesseractDelegate:NSObject,G8TesseractDelegate{
-        let progressBlock:ProgessBlock?
+        var progressBlock:ProgessBlock?
         init(progressBlock:ProgessBlock? = nil) {
             self.progressBlock = progressBlock
             super.init()
@@ -171,29 +178,34 @@ extension Manager {
     }
     
     func newOperation(image:UIImage, progressBlock:ProgessBlock? = nil) -> RecognitionOperation {
-        let operation = RecognitionOperation(engine: tesseract)
-        let delegate = TesseractDelegate(progressBlock: progressBlock)
-        tesseract?.image = image
+        //let operation = RecognitionOperation(engine: tesseract)
+        let operation = RecognitionOperation(language: languages.combineString)
+        //let delegate = TesseractDelegate(progressBlock: progressBlock)
+        //tesseract?.image = image
+        delegate.progressBlock = progressBlock
         operation.delegate = delegate
-        delegates[operation] = delegate
+        operation.tesseract.image = image
+        //delegates[operation] = delegate
         
         return operation
     }
     
     func makeCompletionHandler(operation:RecognitionOperation, completionHandler:CompletionHandler) -> G8RecognitionOperationCallback {
         return {
-            [weak self](tesseract: G8Tesseract! )in
-            print("recoginzedText is \(tesseract.recognizedText)");
-            self?.delegates[operation] = nil
+            [weak self, weak operation](tesseract: G8Tesseract! )in
+            
+            //self?.delegates[operation!] = nil
             self?.endTime = CFAbsoluteTimeGetCurrent()
             let spendTime = (self?.endTime!)!-(self?.startTime!)!
             let seconds = Float(Int(100*spendTime))/100
-            print("spend time \(seconds)s recoginzedText is \(tesseract.recognizedText)");
+            
             if let tesseract = tesseract, recognizeString = tesseract.recognizedText {
+                print("spend time \(seconds)s recoginzedText is \(tesseract.recognizedText)");
                 completionHandler(recognizedText: recognizeString, error: nil)
             } else{
                 completionHandler(recognizedText: nil, error: nil)
             }
+            self?.tesseract = nil
         }
     }
 }
