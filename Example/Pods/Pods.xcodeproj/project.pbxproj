@@ -325,6 +325,10 @@
 		DBBBF837FBA3493177076C982F0DC296 /* baseapi.h in Headers */ = {isa = PBXBuildFile; fileRef = DB729A4FAB40ED9CE2A33D4EC7A32C5A /* baseapi.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DBE4B4A810F1D1735F51D0B2862E3E50 /* clusttool.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB4CA456138836EBE7B606FC3CCA280 /* clusttool.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DC176608F17E1CAB9C5B524AB8AAB4AF /* tessdatamanager.h in Headers */ = {isa = PBXBuildFile; fileRef = F32FED30FADD5CD719C0C1E8F5821259 /* tessdatamanager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		DE07B3FD1D5DD46800BEC8A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE07B3FC1D5DD46800BEC8A3 /* AVFoundation.framework */; };
+		DE07B3FF1D5DD4B100BEC8A3 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE07B3FE1D5DD4B100BEC8A3 /* CoreMedia.framework */; };
+		DE07B4021D5DD52600BEC8A3 /* CvVideoCameraWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = DE07B4001D5DD52600BEC8A3 /* CvVideoCameraWrapper.h */; };
+		DE07B4031D5DD52600BEC8A3 /* CvVideoCameraWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE07B4011D5DD52600BEC8A3 /* CvVideoCameraWrapper.mm */; };
 		DE2C20D57220ABC27997250617B37D17 /* drawedg.h in Headers */ = {isa = PBXBuildFile; fileRef = ECE0180B592A54FC6672F35C75148DA3 /* drawedg.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DE4B471B1D45977100EDDC33 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4B471A1D45977100EDDC33 /* opencv2.framework */; };
 		DE4B47211D460B1400EDDC33 /* RecognitionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DE4B471F1D460B1400EDDC33 /* RecognitionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -332,6 +336,8 @@
 		DE4B47251D46107300EDDC33 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = DE4B47241D46107200EDDC33 /* tessdata */; };
 		DEAA0EF1EA0D10E5301C593497EB5574 /* gradechop.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DB5F127E384DC8256A0F8018E2B9F2F /* gradechop.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		DEB29ABA1D49FBF3008F2650 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB29AB91D49FBF3008F2650 /* libstdc++.6.0.9.tbd */; };
+		DEEACEEC1D5DD2E900E2952C /* CvPhotoCameraMod.h in Headers */ = {isa = PBXBuildFile; fileRef = DEEACEEA1D5DD2E900E2952C /* CvPhotoCameraMod.h */; };
+		DEEACEED1D5DD2E900E2952C /* CvPhotoCameraMod.mm in Sources */ = {isa = PBXBuildFile; fileRef = DEEACEEB1D5DD2E900E2952C /* CvPhotoCameraMod.mm */; };
 		DF1B6F3B1444B715CC2A42AF4C487803 /* dict.h in Headers */ = {isa = PBXBuildFile; fileRef = 4973E987328AB605359EE2DEAF850139 /* dict.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E00389806C7358D15F3B5676E06BA224 /* capi.h in Headers */ = {isa = PBXBuildFile; fileRef = 696DE13FB18F56F2C7D707F5A1B00C7A /* capi.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E018C9E2DD4D0BC93DF494F978477382 /* char_altlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D32CA466361A8A5B8FF488838E9288F /* char_altlist.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -739,6 +745,10 @@
 		DCD11ADD26570A7AABE2E58224814D41 /* matrix.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = matrix.h; path = TesseractOCR/include/tesseract/matrix.h; sourceTree = "<group>"; };
 		DD13C09E28D6F657B201DB9AE2ACB79D /* ndminx.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ndminx.h; path = TesseractOCR/include/tesseract/ndminx.h; sourceTree = "<group>"; };
 		DD348B28E8EE742110636B62390FFE20 /* boxread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = boxread.h; path = TesseractOCR/include/tesseract/boxread.h; sourceTree = "<group>"; };
+		DE07B3FC1D5DD46800BEC8A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		DE07B3FE1D5DD4B100BEC8A3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		DE07B4001D5DD52600BEC8A3 /* CvVideoCameraWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CvVideoCameraWrapper.h; sourceTree = "<group>"; };
+		DE07B4011D5DD52600BEC8A3 /* CvVideoCameraWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CvVideoCameraWrapper.mm; sourceTree = "<group>"; };
 		DE086EE51697048E8BDA3F6E4E9EA58C /* mod128.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mod128.h; path = TesseractOCR/include/tesseract/mod128.h; sourceTree = "<group>"; };
 		DE13F2688BBC936DA67063807D2F8F5F /* ocrblock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocrblock.h; path = TesseractOCR/include/tesseract/ocrblock.h; sourceTree = "<group>"; };
 		DE4B471A1D45977100EDDC33 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
@@ -749,6 +759,8 @@
 		DE69F3CB9F617E24B389D1B32FB2037C /* alltypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = alltypes.h; path = TesseractOCR/include/leptonica/alltypes.h; sourceTree = "<group>"; };
 		DE87B32248B78E9057F907F591962EA6 /* Pods-LB_OCR_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LB_OCR_Tests-resources.sh"; sourceTree = "<group>"; };
 		DEB29AB91D49FBF3008F2650 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libstdc++.6.0.9.tbd"; sourceTree = DEVELOPER_DIR; };
+		DEEACEEA1D5DD2E900E2952C /* CvPhotoCameraMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CvPhotoCameraMod.h; sourceTree = "<group>"; };
+		DEEACEEB1D5DD2E900E2952C /* CvPhotoCameraMod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CvPhotoCameraMod.mm; sourceTree = "<group>"; };
 		DF28AB9E7DB46C3AEB4D1D0295C52E2E /* boxchar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = boxchar.h; path = TesseractOCR/include/tesseract/boxchar.h; sourceTree = "<group>"; };
 		DFC1A34148A62C6B886734316C1FE589 /* allheaders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = allheaders.h; path = TesseractOCR/include/leptonica/allheaders.h; sourceTree = "<group>"; };
 		DFC4466B7133FA9968F3AE8F7F91CC7D /* ratngs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ratngs.h; path = TesseractOCR/include/tesseract/ratngs.h; sourceTree = "<group>"; };
@@ -825,6 +837,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE07B3FF1D5DD4B100BEC8A3 /* CoreMedia.framework in Frameworks */,
+				DE07B3FD1D5DD46800BEC8A3 /* AVFoundation.framework in Frameworks */,
 				DEB29ABA1D49FBF3008F2650 /* libstdc++.6.0.9.tbd in Frameworks */,
 				DE4B471B1D45977100EDDC33 /* opencv2.framework in Frameworks */,
 				5B03D775681A61D0619585E0A00C32CB /* Foundation.framework in Frameworks */,
@@ -895,6 +909,8 @@
 		73025809F33650E67029CD584B254E38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE07B3FE1D5DD4B100BEC8A3 /* CoreMedia.framework */,
+				DE07B3FC1D5DD46800BEC8A3 /* AVFoundation.framework */,
 				DEB29AB91D49FBF3008F2650 /* libstdc++.6.0.9.tbd */,
 				DE4B471A1D45977100EDDC33 /* opencv2.framework */,
 				3F08E6D8007419C5178B557413CBD230 /* TesseractOCR.framework */,
@@ -929,6 +945,7 @@
 		7F408E2B74368F635004576E69DFC574 /* LB_OCR */ = {
 			isa = PBXGroup;
 			children = (
+				DEEACEE91D5DD2D800E2952C /* CvCameraWrapper */,
 				21AEEDBD2F4EB8F79D8AE0B4304B672F /* Error.swift */,
 				BAAF2B14DDBE49531F777AE2D0049E70 /* Language.swift */,
 				4131C420D3967EBA6C5AF21AE24EAB16 /* Manager.swift */,
@@ -1355,6 +1372,17 @@
 			path = "Example/Pods/Target Support Files/LB_OCR";
 			sourceTree = "<group>";
 		};
+		DEEACEE91D5DD2D800E2952C /* CvCameraWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				DEEACEEA1D5DD2E900E2952C /* CvPhotoCameraMod.h */,
+				DEEACEEB1D5DD2E900E2952C /* CvPhotoCameraMod.mm */,
+				DE07B4001D5DD52600BEC8A3 /* CvVideoCameraWrapper.h */,
+				DE07B4011D5DD52600BEC8A3 /* CvVideoCameraWrapper.mm */,
+			);
+			path = CvCameraWrapper;
+			sourceTree = "<group>";
+		};
 		E831B6655F895397E57B3A6163D06E77 /* Pods-LB_OCR_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1392,6 +1420,8 @@
 				C11CFD3E007C1991CB64841EDEAA1376 /* UIImage+Preprocessing.h in Headers */,
 				DE4B47211D460B1400EDDC33 /* RecognitionOperation.h in Headers */,
 				6DA0A6232EF1F030CC650E2E2E2DD1FD /* UIImage+OpenCV.h in Headers */,
+				DE07B4021D5DD52600BEC8A3 /* CvVideoCameraWrapper.h in Headers */,
+				DEEACEEC1D5DD2E900E2952C /* CvPhotoCameraMod.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1870,12 +1900,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D61D167F5B8F91C811F4F93A0D94228 /* Error.swift in Sources */,
+				DEEACEED1D5DD2E900E2952C /* CvPhotoCameraMod.mm in Sources */,
 				DE4B47221D460B1400EDDC33 /* RecognitionOperation.m in Sources */,
 				945216E2D3377CB3EA02F38998E74F5A /* Language.swift in Sources */,
 				481C7B7E14F34CDC21BE128AF8C6148A /* LB_OCR-dummy.m in Sources */,
 				B3D59AFAA49041891D56E681EED7E121 /* Manager.swift in Sources */,
 				8A80E962FC49849CA529AE8368C52008 /* UIImage+OpenCV.mm in Sources */,
 				7018D7A29CECF3251A7A26950B6A724B /* UIImage+Preprocessing.mm in Sources */,
+				DE07B4031D5DD52600BEC8A3 /* CvVideoCameraWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
