@@ -149,16 +149,6 @@
                                     <action selector="rotateClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SD8-Fh-OKy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuN-BN-Lg2">
-                                <rect key="frame" x="527" y="510" width="53" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="53" id="BCE-8y-K8s"/>
-                                    <constraint firstAttribute="height" constant="33" id="eog-Ds-iuL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k60-Kb-fLz">
                                 <rect key="frame" x="264" y="510" width="39" height="30"/>
                                 <constraints>
@@ -170,12 +160,22 @@
                                     <action selector="cleanClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="he4-RS-lLg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuN-BN-Lg2">
+                                <rect key="frame" x="527" y="482" width="53" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="BCE-8y-K8s"/>
+                                    <constraint firstAttribute="height" constant="33" id="eog-Ds-iuL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="urn-nD-tww" secondAttribute="bottom" constant="8" id="1Sj-q0-1NX"/>
                             <constraint firstItem="lNc-6R-GiQ" firstAttribute="top" secondItem="wrX-A9-QFO" secondAttribute="bottom" constant="20" id="2fK-tI-GIx"/>
-                            <constraint firstItem="KuN-BN-Lg2" firstAttribute="centerY" secondItem="DGQ-5b-8wR" secondAttribute="centerY" constant="1.5" id="2hq-W8-c3Y"/>
+                            <constraint firstItem="KuN-BN-Lg2" firstAttribute="centerY" secondItem="DGQ-5b-8wR" secondAttribute="centerY" constant="-26.5" id="2hq-W8-c3Y"/>
                             <constraint firstItem="KHo-b6-zTx" firstAttribute="baseline" secondItem="ajX-4Y-1XA" secondAttribute="baseline" id="4O9-4G-NIf"/>
                             <constraint firstItem="KHo-b6-zTx" firstAttribute="leading" secondItem="lNc-6R-GiQ" secondAttribute="trailing" id="5ee-ND-Ghy"/>
                             <constraint firstItem="eBe-gj-lck" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="5rv-oB-pWC"/>

@@ -188,7 +188,7 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
                 // area may be positive or negative - in accordance with the
                 // contour orientation
                 double area = fabs(contourArea(Mat(approx)));
-                if (approx.size() == 4 && area > 10000 && isContourConvex(Mat(approx))) {
+                if (approx.size() == 4 && area > 1000 && isContourConvex(Mat(approx))) {
                     double maxCosine = 0;
                     //NSLog(@"area = %f", area);
                     for (int j = 2; j < 5; j++) {
@@ -200,7 +200,7 @@ static void findSquares(const Mat &image, vector<vector<cv::Point>> &squares) {
                     // if cosines of all angles are small
                     // (all angles are ~90 degree) then write quandrange
                     // vertices to resultant sequence
-                    if (maxCosine < 0.3) squares.push_back(approx);
+                    if (maxCosine < 0.9) squares.push_back(approx);
                 }
             }
         }

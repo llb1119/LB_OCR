@@ -66,7 +66,7 @@ public class Manager{
                 print("fail to pre-handle image with squarePoint")
             }
         } else {
-//            if let tmpImage = image.getTransformImage()?.threshold {
+//            if let tmpImage = image.threshold {
 //                print("Success to pre-handle image");
 //                preHandledImage = tmpImage;
 //            } else{
