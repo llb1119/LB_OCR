@@ -23,6 +23,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var selectImageBtn: UIButton!
     @IBOutlet weak var rotateBtn: UIButton!
     @IBOutlet weak var cleanBtn: UIButton!
+    @IBOutlet weak var takePicture: UIButton!
     var timer:NSTimer!
     var activityIndicator:UIActivityIndicatorView!
     var ocrEngine:LB_OCR.Manager!
@@ -44,6 +45,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    @IBAction func takePictureClick(sender: AnyObject) {
+        photoCamera?.takePicture()
+        //photoCamera?.stop()
+    }
     @IBAction func cleanClick(sender: AnyObject) {
         dstImageView.image = nil
         textView.text = nil
@@ -102,20 +107,24 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             let cameraButton = UIAlertAction(title: "Take Photo",
                                              style: .Default) { (alert) -> Void in
-//                                                let imagePicker = UIImagePickerController()
-//                                                imagePicker.delegate = self
-//                                                imagePicker.sourceType = .Camera
-//                                                self.presentViewController(imagePicker,
-//                                                                           animated: true,
-//                                                                           completion: nil)
-                                                //self.srcImageView.frame = CGRect(x: 0, y: 0, width: 480, height: 640)
-                                                //self.srcImageView.bounds = self.srcImageView.frame
+                                                let imagePicker = UIImagePickerController()
+                                                imagePicker.delegate = self
+                                                imagePicker.sourceType = .Camera
+                                                self.presentViewController(imagePicker,
+                                                                           animated: true,
+                                                                           completion: nil)
+            }
+            imagePickerActionSheet.addAction(cameraButton)
+            
+            let realtimeDetectBtn = UIAlertAction(title: "Real-time detect rectage",
+                                             style: .Default) { (alert) -> Void in
+                                                self.takePicture.enabled = true
                                                 self.photoCamera = CvVideoCameraWrapper(imageView: self.srcImageView)
                                                 self.photoCamera?.delegate = self
                                                 self.photoCamera?.start()
                                                 
             }
-            imagePickerActionSheet.addAction(cameraButton)
+            imagePickerActionSheet.addAction(realtimeDetectBtn)
         }
         // 4
         let libraryButton = UIAlertAction(title: "Choose Existing",
@@ -204,13 +213,12 @@ extension ViewController: UIImagePickerControllerDelegate {
 }
 extension ViewController: CvVideoCameraWrapperDelegate{
     func processImage(image: UIImage!) {
-//        textView.hidden = true
-//        dstImageView.hidden = false
-//        dstImageView.image = image
     }
     
     func capturedImage(image: UIImage!) {
-        //
+        dstImageView.hidden = false
+        //dstImageView.image = image.rotate(.Right)
+        dstImageView.image = image //.fixOrientation()
     }
     
     func photoCameraCancel() {
@@ -232,6 +240,7 @@ extension ViewController {
         correctingBtn.enabled = enabled
         thresholdBtn.enabled = enabled
         rotateBtn.enabled = enabled
+        takePicture.enabled = enabled
     }
     
     private func hiddenDstImageView(hidden:Bool){

@@ -170,6 +170,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cas-Od-d4n">
+                                <rect key="frame" x="20" y="477" width="85" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="JDG-C9-KpL"/>
+                                    <constraint firstAttribute="height" constant="30" id="Nk0-K8-jMX"/>
+                                </constraints>
+                                <state key="normal" title="Take Picture"/>
+                                <connections>
+                                    <action selector="takePictureClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="o9x-ZV-98L"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -179,6 +190,7 @@
                             <constraint firstItem="KHo-b6-zTx" firstAttribute="baseline" secondItem="ajX-4Y-1XA" secondAttribute="baseline" id="4O9-4G-NIf"/>
                             <constraint firstItem="KHo-b6-zTx" firstAttribute="leading" secondItem="lNc-6R-GiQ" secondAttribute="trailing" id="5ee-ND-Ghy"/>
                             <constraint firstItem="eBe-gj-lck" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="5rv-oB-pWC"/>
+                            <constraint firstItem="1HV-VB-ZF5" firstAttribute="top" secondItem="cas-Od-d4n" secondAttribute="bottom" constant="3" id="7LH-MV-bF0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ajX-4Y-1XA" secondAttribute="trailing" id="Ain-FO-KVM"/>
                             <constraint firstItem="KuN-BN-Lg2" firstAttribute="centerY" secondItem="ajX-4Y-1XA" secondAttribute="centerY" id="Amg-qX-cYU"/>
                             <constraint firstItem="wrX-A9-QFO" firstAttribute="leading" secondItem="eBe-gj-lck" secondAttribute="leading" id="COQ-XC-Vd1"/>
@@ -197,6 +209,7 @@
                             <constraint firstItem="urn-nD-tww" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="YHw-yK-Qhs"/>
                             <constraint firstItem="lNc-6R-GiQ" firstAttribute="centerY" secondItem="urn-nD-tww" secondAttribute="centerY" id="YXz-mG-AL3"/>
                             <constraint firstItem="lNc-6R-GiQ" firstAttribute="centerY" secondItem="urn-nD-tww" secondAttribute="centerY" id="YxR-hz-vc3"/>
+                            <constraint firstItem="cas-Od-d4n" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="bCU-rD-G9g"/>
                             <constraint firstItem="0xg-MS-zbl" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bix-6J-5cf"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="urn-nD-tww" secondAttribute="bottom" constant="20" id="bzq-3v-bWA"/>
                             <constraint firstItem="urn-nD-tww" firstAttribute="top" secondItem="0xg-MS-zbl" secondAttribute="bottom" constant="-1" id="dC4-U9-l2P"/>
@@ -249,6 +262,7 @@
                         <outlet property="rotateBtn" destination="DGQ-5b-8wR" id="rgA-2w-uTq"/>
                         <outlet property="selectImageBtn" destination="KHo-b6-zTx" id="NxM-pg-Er7"/>
                         <outlet property="srcImageView" destination="eBe-gj-lck" id="59o-8O-tLz"/>
+                        <outlet property="takePicture" destination="cas-Od-d4n" id="zpt-Pv-OYN"/>
                         <outlet property="textView" destination="wrX-A9-QFO" id="K06-MZ-QHj"/>
                         <outlet property="thresholdBtn" destination="hn6-xX-ooN" id="hoD-6r-cBn"/>
                         <outlet property="timerLabel" destination="KuN-BN-Lg2" id="UUR-gH-XGn"/>
@@ -256,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="421" y="376.75"/>
+            <point key="canvasLocation" x="421" y="376"/>
         </scene>
     </scenes>
 </document>

@@ -33,6 +33,7 @@
 }
 - (void)start {
     [self.photoCamera start];
+    //self.photoCamera.videoCaptureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
 }
 - (void)stop {
     [self.photoCamera stop];
@@ -60,6 +61,20 @@
     cgPt.p3 = CGPointApplyAffineTransform(cvPt.p3, t);
     
     return cgPt;
+}
+- (void)drawRect:(SquarePoint)square{
+    UIBezierPath *path = [UIBezierPath new];
+    [path moveToPoint:square.p0];
+    [path addLineToPoint:square.p1];
+    [path addLineToPoint:square.p2];
+    [path addLineToPoint:square.p3];
+    [path addLineToPoint:square.p0];
+    [path closePath];
+    self.rectagle.path = path.CGPath;
+    self.rectagle.strokeColor = [UIColor greenColor].CGColor;
+    self.rectagle.fillColor = [UIColor clearColor].CGColor;
+    self.rectagle.lineWidth = 2.0;
+    [_imageView.layer insertSublayer:self.rectagle atIndex:_imageView.layer.sublayers.count];
 }
 // Create an affine transform for converting CGPoints and CGRects from the video frame coordinate space to the
 // preview layer coordinate space. Usage:
@@ -152,20 +167,9 @@
         }
     }
 }
-- (void)drawRect:(SquarePoint)square{
-    UIBezierPath *path = [UIBezierPath new];
-    [path moveToPoint:square.p0];
-    [path addLineToPoint:square.p1];
-    [path addLineToPoint:square.p2];
-    [path addLineToPoint:square.p3];
-    [path addLineToPoint:square.p0];
-    self.rectagle.path = path.CGPath;
-    self.rectagle.strokeColor = [UIColor greenColor].CGColor;
-    self.rectagle.fillColor = [UIColor clearColor].CGColor;
-    self.rectagle.lineWidth = 2.0;
-    [_imageView.layer insertSublayer:self.rectagle atIndex:_imageView.layer.sublayers.count];
-}
+
 - (void)photoCamera:(CvPhotoCamera*)photoCamera capturedImage:(UIImage *)image{
+    [self stop];
     if ([self.delegate respondsToSelector:@selector(capturedImage:)]) {
         [self.delegate capturedImage:image];
     }
