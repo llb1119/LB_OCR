@@ -27,6 +27,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     var activityIndicator:UIActivityIndicatorView!
     var ocrEngine:LB_OCR.Manager!
     var tick = 0
+    var photoCamera:CvVideoCameraWrapper?
+    
     @IBOutlet weak var thresholdBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,12 +102,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             let cameraButton = UIAlertAction(title: "Take Photo",
                                              style: .Default) { (alert) -> Void in
-                                                let imagePicker = UIImagePickerController()
-                                                imagePicker.delegate = self
-                                                imagePicker.sourceType = .Camera
-                                                self.presentViewController(imagePicker,
-                                                                           animated: true,
-                                                                           completion: nil)
+//                                                let imagePicker = UIImagePickerController()
+//                                                imagePicker.delegate = self
+//                                                imagePicker.sourceType = .Camera
+//                                                self.presentViewController(imagePicker,
+//                                                                           animated: true,
+//                                                                           completion: nil)
+                                                //self.srcImageView.frame = CGRect(x: 0, y: 0, width: 480, height: 640)
+                                                //self.srcImageView.bounds = self.srcImageView.frame
+                                                self.photoCamera = CvVideoCameraWrapper(imageView: self.srcImageView)
+                                                self.photoCamera?.delegate = self
+                                                self.photoCamera?.start()
+                                                
             }
             imagePickerActionSheet.addAction(cameraButton)
         }
@@ -193,6 +201,26 @@ extension ViewController: UIImagePickerControllerDelegate {
         dismissViewControllerAnimated(true, completion: nil)
         setBtns(true)
     }
+}
+extension ViewController: CvVideoCameraWrapperDelegate{
+    func processImage(image: UIImage!) {
+//        textView.hidden = true
+//        dstImageView.hidden = false
+//        dstImageView.image = image
+    }
+    
+    func capturedImage(image: UIImage!) {
+        //
+    }
+    
+    func photoCameraCancel() {
+        //
+    }
+    
+    func scanRectangle() -> Bool {
+        return true
+    }
+    
 }
 //MARK: private fun
 extension ViewController {
