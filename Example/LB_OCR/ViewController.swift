@@ -97,6 +97,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         srcImageView.image = nil
         dstImageView.image = nil
         textView.text = nil
+        self.photoCamera?.stop()
+        self.photoCamera = nil
         // 1
         view.endEditing(true)
         ()
